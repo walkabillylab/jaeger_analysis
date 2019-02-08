@@ -48,6 +48,7 @@ The **data** folder also contains a file called **intervals.csv** which stores i
 **Note**: This file should be kept updated throughout the experiment.
 
 
+## Run
 Steps to run the code as in the follows:
 
 ### 1. Modifying required variables
