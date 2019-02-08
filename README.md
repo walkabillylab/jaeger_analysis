@@ -5,7 +5,7 @@
 
 ## Introduction
 
-Code to clean data from [Jaeger Oxycon Pro](https://www.ntnu.edu/documents/221360533/221362168/oxypro.pdf/91b256f4-97d7-4408-8eec-53869132a03d) metabolic cart based on the paper "Methods Used to Process Data from Indirect Calorimetry and Their Application to VO2MAX" Robert A Robergs and Angus F Burnett. Journal of Exercise Physiology. 6(2), 2003. https://www.asep.org/asep/asep/Robergs3.pdf
+Code to clean data from [Jaeger Oxycon Pro](https://www.ntnu.edu/documents/221360533/221362168/oxypro.pdf/91b256f4-97d7-4408-8eec-53869132a03d) metabolic cart based on the paper "[Methods Used to Process Data from Indirect Calorimetry and Their Application to VO2MAX](https://www.asep.org/asep/asep/Robergs3.pdf)" Robert A Robergs and Angus F Burnett. Journal of Exercise Physiology. 6(2), 2003. 
 
 
 ## Preliminaries
