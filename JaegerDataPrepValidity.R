@@ -30,19 +30,19 @@ library(dplyr)
 OS <- Sys.info()
 if (OS["sysname"] == "Windows") {
   path <-
-    "Z:/data/Jaeger/"
+    "Z:/Research/dfuller/Walkabilly/studies/smarphone_accel/data/Jaeger/"
   intrPath <-
-    "Z:/data/"
+    "Z:/Research/dfuller/Walkabilly/studies/smarphone_accel/data/"
 } else {
   path <-
-    "/data/Jaeger/"
+    "/Volumes/hkr-storage/Research/dfuller/Walkabilly/studies/smarphone_accel/data/Jaeger/"
   intrPath <-
-    "/data/"
+    "/Volumes/hkr-storage/Research/dfuller/Walkabilly/studies/smarphone_accel/data/"
 }
 setwd(path)
 
 #Required user id to be processed
-uid <- "100"
+uid <- "128"
 
 #Imputation method
 method <- "spline"
@@ -76,7 +76,7 @@ for (i in 1:length(filenames)) {
     read.table(
       file = filenames[i],
       header = FALSE,
-      skip = 12,
+      skip = 11,
       skipNul = TRUE,
       blank.lines.skip = TRUE,
       sep = ",",
@@ -97,13 +97,26 @@ for (i in 1:length(filenames)) {
     )
   
   #Filtering data out based on uid and start and end date
-  usrInfo <- intervals[intervals[, "userid"] == uid,]
+  usrInfo <- intervals[which(intervals$userid == uid),]
   startDate <- usrInfo[, "start"]
   endDate <- usrInfo[, "end"]
   
-  #Convert Jaeger Time to desired record_time
+  #Fix Jaeger time
   colnames(inData)[1] <- "record_time"
-  inData[, "record_time"] <- as.character(inData[, "record_time"])
+  inData[, "record_time"] <- trimws(as.character(inData[, "record_time"]))
+  exctOne <- union(which(inData$record_time == "1:00:00"), which(inData$record_time == "01:00:00"))
+  likeOne <- which(inData$record_time %like% "01:00:0")
+  
+  if(length(exctOne) >= 2) {
+    exctOne <- exctOne[length(exctOne)] - 1
+    inData[1:exctOne, "record_time"] <- paste0("00:", substring(inData[1:exctOne, "record_time"], 1, 5))
+    
+  } else if (length(likeOne) > 0) {
+    likeOne <- likeOne[1] - 1
+    inData[1:likeOne, "record_time"] <- paste0("00:", substring(inData[1:likeOne, "record_time"], 1, 5))
+  }
+  
+  #Convert Jaeger Time to desired record_time
   for (j in 1:nrow(inData)) {
     pos <-
       unlist(strsplit(inData[j, "record_time"], "[:]"))
