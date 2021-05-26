@@ -1,5 +1,5 @@
 ## Authors
-* [Javad Rahimipour Anaraki](https://github.com/jracp)
+* [Javad Rahimipour Anaraki](https://github.com/jranaraki)
 * [Daniel Fuller](https://github.com/walkabillylab)
 
 
